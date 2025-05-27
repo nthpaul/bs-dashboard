@@ -2,8 +2,6 @@
 
 import React from "react";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   ResponsiveContainer,
@@ -18,11 +16,10 @@ interface LineChartComponentProps {
   title: string;
   subtitle?: string;
   color?: string;
-  yAxisLabel?: string;
 }
 
 export const LineChartComponent: React.FC<LineChartComponentProps> = React.memo(
-  ({ data, title, subtitle, color = "#3B82F6", yAxisLabel }) => {
+  ({ data, title, subtitle, color = "#3B82F6" }) => {
     // Format data for recharts
     const chartData = React.useMemo(
       () =>
