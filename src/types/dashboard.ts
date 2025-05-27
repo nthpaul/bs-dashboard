@@ -45,3 +45,11 @@ export interface NavItem {
   active?: boolean;
   children?: NavItem[];
 }
+
+export type TimePeriod = "1H" | "24H" | "7D" | "30D" | "90D";
+
+export interface TimePeriodOption {
+  id: TimePeriod;
+  label: string;
+  active: boolean;
+}

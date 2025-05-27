@@ -7,15 +7,32 @@ import { MetricCard } from "./ui/MetricCard";
 import { BarChartComponent } from "./charts/BarChart";
 import { LineChartComponent } from "./charts/LineChart";
 import { PerformanceTable } from "./ui/PerformanceTable";
-import { DashboardData, NavItem } from "@/types/dashboard";
+import { TimeRangeTabs } from "./ui/TimeRangeTabs";
+import {
+  DashboardData,
+  NavItem,
+  TimePeriod,
+  TimePeriodOption,
+} from "@/types/dashboard";
 
 interface DashboardProps {
   data: DashboardData;
   navigationItems: NavItem[];
+  timePeriods: TimePeriodOption[];
+  selectedPeriod: TimePeriod;
+  onPeriodChange: (period: TimePeriod) => void;
+  loading?: boolean;
 }
 
 export const Dashboard: React.FC<DashboardProps> = React.memo(
-  ({ data, navigationItems }) => {
+  ({
+    data,
+    navigationItems,
+    timePeriods,
+    selectedPeriod,
+    onPeriodChange,
+    loading = false,
+  }) => {
     const { metrics, jobDurationDistribution, charts, performanceMetrics } =
       data;
     const [sidebarOpen, setSidebarOpen] = React.useState(false);
@@ -40,6 +57,13 @@ export const Dashboard: React.FC<DashboardProps> = React.memo(
           />
 
           <main className="flex-1 p-4 lg:p-6 lg:ml-0">
+            {/* Time Range Tabs */}
+            <TimeRangeTabs
+              timePeriods={timePeriods}
+              selectedPeriod={selectedPeriod}
+              onPeriodChange={onPeriodChange}
+              loading={loading}
+            />
             {/* Top Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <MetricCard

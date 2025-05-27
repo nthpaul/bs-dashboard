@@ -5,7 +5,15 @@ import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 import { useDashboardData } from "@/hooks/useDashboardData";
 
 export default function Home() {
-  const { data, navigationItems, loading, error } = useDashboardData();
+  const {
+    data,
+    navigationItems,
+    timePeriods,
+    selectedPeriod,
+    loading,
+    error,
+    onPeriodChange,
+  } = useDashboardData();
 
   if (loading) {
     return <LoadingSkeleton />;
@@ -28,5 +36,14 @@ export default function Home() {
     return <LoadingSkeleton />;
   }
 
-  return <Dashboard data={data} navigationItems={navigationItems} />;
+  return (
+    <Dashboard
+      data={data}
+      navigationItems={navigationItems}
+      timePeriods={timePeriods}
+      selectedPeriod={selectedPeriod}
+      onPeriodChange={onPeriodChange}
+      loading={loading}
+    />
+  );
 }
